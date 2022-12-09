@@ -3,6 +3,9 @@ import * as React from 'react'
 import { useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 
+
+
+/*
 function Box(props: JSX.IntrinsicElements['mesh']) {
   // This reference will give us direct access to the THREE.Mesh object
   const ref = useRef<THREE.Mesh>(null!)
@@ -38,7 +41,6 @@ export default function App() {
   )
 }
 
-/*
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
