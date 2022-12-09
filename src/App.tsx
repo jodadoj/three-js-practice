@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import * as React from 'react'
 import { useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
+//import Sound from 'react-sound'
 
 function Box(props: JSX.IntrinsicElements['mesh']) {
   // This reference will give us direct access to the THREE.Mesh object
@@ -28,13 +29,19 @@ function Box(props: JSX.IntrinsicElements['mesh']) {
 
 export default function App() {
   return (
-    <Canvas>
-      <ambientLight intensity={0.5} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-      <pointLight position={[-10, -10, -10]} />
-      <Box position={[-1.2, 0, 0]} />
-      <Box position={[1.2, 0, 0]} />
-    </Canvas>
+    <div>
+        <audio id="player" autoPlay controls>
+            <source src="../music/MOTM.mp3" type="../music/MOTM.mp3"/>
+            Your browser does not support the audio element.
+        </audio>
+      <Canvas>
+        <ambientLight intensity={0.5} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+        <pointLight position={[-10, -10, -10]} />
+        <Box position={[-1.2, 0, 0]} />
+        <Box position={[1.2, 0, 0]} />
+      </Canvas>
+    </div>
   )
 }
 
