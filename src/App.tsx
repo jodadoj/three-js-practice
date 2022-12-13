@@ -3,6 +3,10 @@ import React, { useState } from "react";
 // import 'canvas' from react three fibre (assumably different from other canvases)
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
+import { Suspense } from 'react'
+import { Float } from "@react-three/drei";
+
 
 
 function toggle(currentValue:boolean):boolean{
@@ -13,8 +17,7 @@ function App():JSX.Element{
 
   const [isBox, setIsBox] = useState(true);
 
-  //const pokeball = useLoader(OBJLoader, '../components/quikPokeball.obj');
-  //<primitive object={pokeball} />
+  const pokeball = useGLTF('/models/quikPokeball.gltf');
 
   return(
     <div className="canvas-container">
@@ -25,6 +28,9 @@ function App():JSX.Element{
         <directionalLight color="yellow" position={[-5,-2,-1]} />
 
         
+        <Suspense fallback={null}>
+          <Float><primitive object={pokeball.scene} /></Float>
+        </Suspense>
 
         {/* An React component different from 'canvas' - unseen UI while undefined */}
         {/* Code is eqivalent to:*/}
@@ -49,7 +55,8 @@ function App():JSX.Element{
               renderer.setSize(width, height)
               document.querySelector('#canvas-container').appendChild(renderer.domElement)
         */}
-        <mesh onClick={ () => {setIsBox(toggle)} }>
+
+        <mesh position={[0,-5,0]} onClick={ () => {setIsBox(toggle)} }>
           {/* Should be drawn unseen by HTML */}
           {isBox ? <boxGeometry args={[2,2,2]} />
           : <sphereGeometry args={[1,16,16]} />
