@@ -8,7 +8,7 @@ import { OrbitControls } from "@react-three/drei";
 function App():JSX.Element{
 
   return(
-    <div id="canvas-container">
+    <div className="canvas-container">
       <Canvas> 
         <OrbitControls />
         <ambientLight intensity={0.1} />
@@ -26,6 +26,32 @@ function App():JSX.Element{
               document.querySelector('#canvas-container').appendChild(renderer.domElement)
         */}
         <mesh>
+          {/* Should be drawn unseen by HTML */}
+          <boxGeometry args={[2,2,2]} />
+          {/* Research but assuming is the function that generates a (default) box
+           and the below adds a material to colour/texture it */}
+          <meshStandardMaterial />
+          {/* Code is eqivalent to:
+
+              const mesh = new THREE.Mesh()
+              mesh.geometry = new THREE.BoxGeometry()
+              mesh.material = new THREE.MeshStandardMaterial()
+          */}
+        </mesh>
+        <mesh position={[5,0,0]}>
+          {/* Should be drawn unseen by HTML */}
+          <boxGeometry args={[2,2,2]} />
+          {/* Research but assuming is the function that generates a (default) box
+           and the below adds a material to colour/texture it */}
+          <meshStandardMaterial />
+          {/* Code is eqivalent to:
+
+              const mesh = new THREE.Mesh()
+              mesh.geometry = new THREE.BoxGeometry()
+              mesh.material = new THREE.MeshStandardMaterial()
+          */}
+        </mesh>
+        <mesh position={[-5,0,0]}>
           {/* Should be drawn unseen by HTML */}
           <boxGeometry args={[2,2,2]} />
           {/* Research but assuming is the function that generates a (default) box
