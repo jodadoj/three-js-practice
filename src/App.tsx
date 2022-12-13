@@ -1,70 +1,57 @@
-import * as THREE from 'three'
-import * as React from 'react'
-import { useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+//import react 
+import React from "react";
+// import 'canvas' from react three fibre (assumably different from other canvases)
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 
 
+function App():JSX.Element{
 
-/*
-function Box(props: JSX.IntrinsicElements['mesh']) {
-  // This reference will give us direct access to the THREE.Mesh object
-  const ref = useRef<THREE.Mesh>(null!)
-  // Hold state for hovered and clicked events
-  const [hovered, hover] = useState(false)
-  const [clicked, click] = useState(false)
-  // Rotate mesh every frame, this is outside of React without overhead
-  useFrame((state, delta) => (ref.current.rotation.x += 0.01))
+  return(
+    <div id="canvas-container">
+      <Canvas> 
+        <OrbitControls />
+        <ambientLight intensity={0.1} />
+        <directionalLight color="blue" position={[2,3,5]} />
+        <directionalLight color="yellow" position={[-5,-2,-1]} />
 
-  return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={clicked ? 1.5 : 1}
-      onClick={(event) => click(!clicked)}
-      onPointerOver={(event) => hover(true)}
-      onPointerOut={(event) => hover(false)}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-    </mesh>
-  )
-}
+        {/* An React component different from 'canvas' - unseen UI while undefined */}
+        {/* Code is eqivalent to:
 
-export default function App() {
-  return (
-    <Canvas>
-      <ambientLight intensity={0.5} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-      <pointLight position={[-10, -10, -10]} />
-      <Box position={[-1.2, 0, 0]} />
-      <Box position={[1.2, 0, 0]} />
-    </Canvas>
-  )
-}
+              const scene = new THREE.Scene()
+              const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000)
 
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+              const renderer = new THREE.WebGLRenderer()
+              renderer.setSize(width, height)
+              document.querySelector('#canvas-container').appendChild(renderer.domElement)
+        */}
+        <mesh>
+          {/* Should be drawn unseen by HTML */}
+          <boxGeometry args={[2,2,2]} />
+          {/* Research but assuming is the function that generates a (default) box
+           and the below adds a material to colour/texture it */}
+          <meshStandardMaterial />
+          {/* Code is eqivalent to:
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+              const mesh = new THREE.Mesh()
+              mesh.geometry = new THREE.BoxGeometry()
+              mesh.material = new THREE.MeshStandardMaterial()
+          */}
+        </mesh>
+          {/* Code is eqivalent to:
+
+              scene.add(mesh)
+
+              function animate() {
+                requestAnimationFrame(animate)
+                renderer.render(scene, camera)
+              }
+
+              animate()
+          */}
+      </Canvas>
+    </ div>
   );
 }
 
 export default App;
-*/
