@@ -1,18 +1,21 @@
 //import react 
-import React from "react";
+import React, { useState } from "react";
 // import 'canvas' from react three fibre (assumably different from other canvases)
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
-import { useLoader } from '@react-three/fiber'
 
 
-
+function toggle(currentValue:boolean):boolean{
+ return !currentValue;
+}
 
 function App():JSX.Element{
 
-  const pokeball = useLoader(OBJLoader, '../components/quikPokeball.obj')
-  
+  const [isBox, setIsBox] = useState(true);
+
+  //const pokeball = useLoader(OBJLoader, '../components/quikPokeball.obj');
+  //<primitive object={pokeball} />
+
   return(
     <div className="canvas-container">
       <Canvas> 
@@ -21,7 +24,7 @@ function App():JSX.Element{
         <directionalLight color="blue" position={[2,3,5]} />
         <directionalLight color="yellow" position={[-5,-2,-1]} />
 
-        <primitive object={pokeball} />
+        
 
         {/* An React component different from 'canvas' - unseen UI while undefined */}
         {/* Code is eqivalent to:*/}
@@ -46,9 +49,11 @@ function App():JSX.Element{
               renderer.setSize(width, height)
               document.querySelector('#canvas-container').appendChild(renderer.domElement)
         */}
-        <mesh>
+        <mesh onClick={ () => {setIsBox(toggle)} }>
           {/* Should be drawn unseen by HTML */}
-          <torusGeometry args={[10,3,16,100]} />
+          {isBox ? <boxGeometry args={[2,2,2]} />
+          : <sphereGeometry args={[1,16,16]} />
+          }
           {/* Research but assuming is the function that generates a (default) box
            and the below adds a material to colour/texture it */}
           <meshStandardMaterial />
