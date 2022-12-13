@@ -16,9 +16,22 @@ function App():JSX.Element{
         <directionalLight color="yellow" position={[-5,-2,-1]} />
 
         {/* An React component different from 'canvas' - unseen UI while undefined */}
-        {/* Code is eqivalent to:
+        {/* Code is eqivalent to:*/}
 
-              const scene = new THREE.Scene()
+        <mesh position={[5,0,0]}>
+          {/* Should be drawn unseen by HTML */}
+          <boxGeometry args={[2,2,2]} />
+          {/* Research but assuming is the function that generates a (default) box
+           and the below adds a material to colour/texture it */}
+          <meshStandardMaterial />
+          {/* Code is eqivalent to:
+
+              const mesh = new THREE.Mesh()
+              mesh.geometry = new THREE.BoxGeometry()
+              mesh.material = new THREE.MeshStandardMaterial()
+          */}
+        </mesh>
+              {/*const scene = new THREE.Scene()
               const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000)
 
               const renderer = new THREE.WebGLRenderer()
@@ -27,7 +40,7 @@ function App():JSX.Element{
         */}
         <mesh>
           {/* Should be drawn unseen by HTML */}
-          <boxGeometry args={[2,2,2]} />
+          <boxGeometry args={[2,5,2]} />
           {/* Research but assuming is the function that generates a (default) box
            and the below adds a material to colour/texture it */}
           <meshStandardMaterial />
@@ -53,7 +66,7 @@ function App():JSX.Element{
         </mesh>
         <mesh position={[-5,0,0]}>
           {/* Should be drawn unseen by HTML */}
-          <boxGeometry args={[2,2,2]} />
+          <boxGeometry args={[2,10,2]} />
           {/* Research but assuming is the function that generates a (default) box
            and the below adds a material to colour/texture it */}
           <meshStandardMaterial />
