@@ -2,8 +2,10 @@
 //import React from "react";
 // import 'canvas' from react three fibre (assumably different from other canvases)
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stage } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { Suspense } from 'react'
+
+// import { Stage } from "@react-three/drei";
 // import { useGLTF } from "@react-three/drei";
 // import { Float } from "@react-three/drei";
 // import PhyPlane from "./physPlane";
@@ -18,18 +20,18 @@ import { CuboidCollider } from "@react-three/rapier";
 
 import { Physics, RigidBody, Debug } from "@react-three/rapier";
 
-function more(currentArr:number[]):number[] {
-  if (currentArr.length < 30){
-    currentArr.push(1); 
-  }
-  return currentArr;
-}
-function less(currentArr:number[]):number[] {
-  if (currentArr.length > 0){
-    currentArr.pop();
-  }
-  return currentArr;
-}
+// function more(currentArr:number[]):number[] {
+//   if (currentArr.length < 30){
+//     currentArr.push(1); 
+//   }
+//   return currentArr;
+// }
+// function less(currentArr:number[]):number[] {
+//   if (currentArr.length > 0){
+//     currentArr.pop();
+//   }
+//   return currentArr;
+// }
 
 
 
