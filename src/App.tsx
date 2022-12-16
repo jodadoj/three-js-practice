@@ -8,12 +8,13 @@ import { Suspense } from 'react'
 import { Float } from "@react-three/drei";
 import PhyPlane from "./physPlane";
 
-import { Physics } from "@react-three/cannon";
-
 import { useThree } from "@react-three/fiber";
 
 import { Pokeball } from "./pokeball"; 
 
+import { Plane } from "@react-three/drei";
+
+import { CuboidCollider } from "@react-three/rapier";
 
 import { Physics, RigidBody, Debug } from "@react-three/rapier";
 
@@ -48,17 +49,24 @@ function App():JSX.Element{
       > 
         <OrbitControls />
         <ambientLight intensity={1}/>
-        
+        <Suspense>
           <Physics gravity={[0, -9.81, 0]}>
-              <Pokeball position={[3-Math.random()*6,3-Math.random()*6,3-Math.random()*6]} />
-              <Pokeball position={[3-Math.random()*6,3-Math.random()*6,3-Math.random()*6]} />
-              <Pokeball position={[3-Math.random()*6,3-Math.random()*6,3-Math.random()*6]} />
-              <PhyPlane
-                    color={0x75e6da}
-                    position={[0, -5, 0]}
-                    rotation={[-Math.PI / 2, 0, 0]}
-                />
+            <RigidBody colliders="hull" position={[3-Math.random()*6,3-Math.random()*6,3-Math.random()*6]} >
+              <Pokeball />
+            </RigidBody>
+            <RigidBody colliders="hull" position={[3-Math.random()*6,3-Math.random()*6,3-Math.random()*6]} >
+              <Pokeball />
+            </RigidBody>
+            <RigidBody colliders="hull" position={[3-Math.random()*6,3-Math.random()*6,3-Math.random()*6]} >
+              <Pokeball />
+            </RigidBody>
+            <CuboidCollider position={[0, -4, 0]} args={[20, .1, 20]} >
+              <Plane args={[20, 20]} rotation-x={Math.PI * -0.5}>
+                <meshStandardMaterial color={0x75e6da} />
+              </Plane>
+            </CuboidCollider>
           </Physics>
+        </Suspense>  
       </Canvas>
     </ div>
   );
