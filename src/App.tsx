@@ -3,7 +3,7 @@
 // import 'canvas' from react three fibre (assumably different from other canvases)
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 
 // import { Stage } from "@react-three/drei";
 // import { useGLTF } from "@react-three/drei";
@@ -18,7 +18,7 @@ import { Plane } from "@react-three/drei";
 
 import { CuboidCollider } from "@react-three/rapier";
 
-import { Physics, RigidBody } from "@react-three/rapier";
+import { Physics } from "@react-three/rapier";
 
 // function more(currentArr:number[]):number[] {
 //   if (currentArr.length < 30){
@@ -37,24 +37,20 @@ import { Physics, RigidBody } from "@react-three/rapier";
 
 function App():JSX.Element{
 
-  //const pokeball = useGLTF('/models/quikPokeball.gltf');
+  const [pokeballList, setPokeballList] =useState<number[]>([1,2,3]);
   
   return(
     <div className="canvas-container">
+
+
       <Canvas > 
         <OrbitControls />
         <ambientLight intensity={1}/>
         <Suspense>
           <Physics gravity={[0, -9.81, 0]}>
-            <RigidBody colliders="hull" position={[3-Math.random()*6,3-Math.random()*6,3-Math.random()*6]} >
-              <Pokeball id={1}/>
-            </RigidBody>
-            <RigidBody colliders="hull" position={[3-Math.random()*6,3-Math.random()*6,3-Math.random()*6]} >
-              <Pokeball id={2}/>
-            </RigidBody>
-            <RigidBody colliders="hull" position={[3-Math.random()*6,3-Math.random()*6,3-Math.random()*6]} >
-              <Pokeball id={3}/>
-            </RigidBody>
+
+            {pokeballList.map( (currentPokeballId) => {return <Pokeball id={currentPokeballId} />} )}
+
             <CuboidCollider position={[0, -4, 0]} args={[20, .1, 20]} >
               <Plane args={[20, 20]} rotation-x={Math.PI * -0.5}>
                 <meshStandardMaterial color={0x75e6da} />
