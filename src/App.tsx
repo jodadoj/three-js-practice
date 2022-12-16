@@ -73,7 +73,7 @@ function App():JSX.Element{
             {return <Pokeball id={currentPokeballId} key={currentPokeballId} />} )}
 
             <CuboidCollider position={[0, -4, 0]} args={[20, .1, 20]} >
-              <Plane args={[20, 20]} rotation-x={Math.PI * -0.5}>
+              <Plane args={[50, 50]} rotation-x={Math.PI * -0.5}>
                 <meshStandardMaterial color={0x75e6da} />
               </Plane>
             </CuboidCollider>
