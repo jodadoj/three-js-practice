@@ -40,7 +40,19 @@ import { Float } from "@react-three/drei";
 function App():JSX.Element{
 
   const [pokeballList, setPokeballList] =useState<number[]>([]);
-  
+
+  function handleAddBall(){ //in function to use useState
+    const newList = [...pokeballList]; //spread operator to shallow copy og list, avoids mutation error
+    if (newList.length > 0){
+      const newId = newList[newList.length-1]+1;
+      newList.push(newId);
+    }
+    else {
+      newList.push(1);
+    }  
+    setPokeballList(newList);
+  }
+
   return(
     <div className="canvas-container">
 
@@ -48,7 +60,7 @@ function App():JSX.Element{
       <Canvas > 
         <Float>
           <Text3D position={[-2,0,0]} font={'/fonts/Roboto Mono_Bold.json'}
-          onClick={ (event) => console.log('Clicked the text!') }> Click 
+          onClick={ handleAddBall }> Click 
             <meshStandardMaterial color={0x75e6da} />
           </Text3D>
         </Float>
