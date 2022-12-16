@@ -49,7 +49,7 @@ function App():JSX.Element{
         <Suspense>
           <Physics gravity={[0, -9.81, 0]}>
 
-            {pokeballList.map( (currentPokeballId) => {return <Pokeball id={currentPokeballId} />} )}
+            {pokeballList.map( (currentPokeballId) => {return <Pokeball id={currentPokeballId} key={currentPokeballId} />} )}
 
             <CuboidCollider position={[0, -4, 0]} args={[20, .1, 20]} >
               <Plane args={[20, 20]} rotation-x={Math.PI * -0.5}>
