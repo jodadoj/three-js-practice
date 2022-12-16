@@ -2,7 +2,7 @@
 //import React from "react";
 // import 'canvas' from react three fibre (assumably different from other canvases)
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Text3D } from "@react-three/drei";
 import { Suspense, useState } from 'react'
 
 // import { Stage } from "@react-three/drei";
@@ -19,6 +19,8 @@ import { Plane } from "@react-three/drei";
 import { CuboidCollider } from "@react-three/rapier";
 
 import { Physics } from "@react-three/rapier";
+
+import { Float } from "@react-three/drei";
 
 // function more(currentArr:number[]):number[] {
 //   if (currentArr.length < 30){
@@ -37,19 +39,26 @@ import { Physics } from "@react-three/rapier";
 
 function App():JSX.Element{
 
-  const [pokeballList, setPokeballList] =useState<number[]>([1,2,3]);
+  const [pokeballList, setPokeballList] =useState<number[]>([]);
   
   return(
     <div className="canvas-container">
 
 
       <Canvas > 
+        <Float>
+          <Text3D position={[-2,0,0]} font={'/fonts/Roboto Mono_Bold.json'}
+          onClick={ (event) => console.log('Clicked the text!') }> Click 
+            <meshStandardMaterial color={0x75e6da} />
+          </Text3D>
+        </Float>
         <OrbitControls />
         <ambientLight intensity={1}/>
         <Suspense>
           <Physics gravity={[0, -9.81, 0]}>
 
-            {pokeballList.map( (currentPokeballId) => {return <Pokeball id={currentPokeballId} key={currentPokeballId} />} )}
+            {pokeballList.map( (currentPokeballId) => 
+            {return <Pokeball id={currentPokeballId} key={currentPokeballId} />} )}
 
             <CuboidCollider position={[0, -4, 0]} args={[20, .1, 20]} >
               <Plane args={[20, 20]} rotation-x={Math.PI * -0.5}>
