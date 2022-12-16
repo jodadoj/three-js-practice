@@ -1,14 +1,14 @@
 //import react 
-import React, { useState } from "react";
+//import React from "react";
 // import 'canvas' from react three fibre (assumably different from other canvases)
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stage } from "@react-three/drei";
-import { useGLTF } from "@react-three/drei";
 import { Suspense } from 'react'
-import { Float } from "@react-three/drei";
-import PhyPlane from "./physPlane";
+// import { useGLTF } from "@react-three/drei";
+// import { Float } from "@react-three/drei";
+// import PhyPlane from "./physPlane";
 
-import { useThree } from "@react-three/fiber";
+// import { useThree } from "@react-three/fiber";
 
 import { Pokeball } from "./pokeball"; 
 
