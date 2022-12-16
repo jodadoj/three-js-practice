@@ -18,7 +18,7 @@ import { Plane } from "@react-three/drei";
 
 import { CuboidCollider } from "@react-three/rapier";
 
-import { Physics, RigidBody, Debug } from "@react-three/rapier";
+import { Physics, RigidBody } from "@react-three/rapier";
 
 // function more(currentArr:number[]):number[] {
 //   if (currentArr.length < 30){
