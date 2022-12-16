@@ -41,26 +41,19 @@ function App():JSX.Element{
   
   return(
     <div className="canvas-container">
-      <Canvas
-      
-  onClick={(e: any) => console.log('click')}
-  onContextMenu={(e: any) => console.log('context menu')}
-  onDoubleClick={(e: any) => console.log('double click')}
-  onWheel={(e: any) => console.log('wheel spins')}
-  onPointerMissed={() => console.log('missed')}
-      > 
+      <Canvas > 
         <OrbitControls />
         <ambientLight intensity={1}/>
         <Suspense>
           <Physics gravity={[0, -9.81, 0]}>
             <RigidBody colliders="hull" position={[3-Math.random()*6,3-Math.random()*6,3-Math.random()*6]} >
-              <Pokeball />
+              <Pokeball id={1}/>
             </RigidBody>
             <RigidBody colliders="hull" position={[3-Math.random()*6,3-Math.random()*6,3-Math.random()*6]} >
-              <Pokeball />
+              <Pokeball id={2}/>
             </RigidBody>
             <RigidBody colliders="hull" position={[3-Math.random()*6,3-Math.random()*6,3-Math.random()*6]} >
-              <Pokeball />
+              <Pokeball id={3}/>
             </RigidBody>
             <CuboidCollider position={[0, -4, 0]} args={[20, .1, 20]} >
               <Plane args={[20, 20]} rotation-x={Math.PI * -0.5}>
