@@ -1,7 +1,7 @@
 //import react 
 //import React from "react";
 // import 'canvas' from react three fibre (assumably different from other canvases)
-import { Canvas } from "@react-three/fiber";
+import { Canvas, Euler } from "@react-three/fiber";
 import { OrbitControls, Text3D } from "@react-three/drei";
 import { Suspense, useState } from 'react'
 
@@ -40,6 +40,11 @@ import { Float } from "@react-three/drei";
 function App(): JSX.Element {
 
   const [pokeballList, setPokeballList] = useState<number[]>([]);
+  // const [floorRotation, setFloorRotation] = useState<Euler|undefined>([ Math.PI*-0.5,0,0 ]);
+
+  // function handleResetFloor() {
+  //   setFloorRotation([ Math.PI*-0.5,0,0 ]);
+  // }
 
   function handleAddBall() { //in function to use useState
     const newList = [...pokeballList]; //spread operator to shallow copy og list, avoids mutation error
@@ -88,7 +93,7 @@ function App(): JSX.Element {
                 onClick={() => console.log(currentPokeballId + ' hi')} />
             })}
 
-            <RigidBody colliders="trimesh">
+            <RigidBody colliders="trimesh" type="fixed">
               <Plane
                 position={[0, -20, 0]}
                 args={[60, 60]}
