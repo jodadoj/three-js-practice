@@ -12,11 +12,11 @@ import { Suspense, useState } from 'react'
 
 // import { useThree } from "@react-three/fiber";
 
-import { Pokeball } from "./pokeball"; 
+import { Pokeball } from "./pokeball";
 
 import { Plane } from "@react-three/drei";
 
-import { CuboidCollider } from "@react-three/rapier";
+import { RigidBody } from "@react-three/rapier";
 
 import { Physics } from "@react-three/rapier";
 
@@ -37,48 +37,69 @@ import { Float } from "@react-three/drei";
 
 
 
-function App():JSX.Element{
+function App(): JSX.Element {
 
-  const [pokeballList, setPokeballList] =useState<number[]>([]);
+  const [pokeballList, setPokeballList] = useState<number[]>([]);
 
-  function handleAddBall(){ //in function to use useState
+  function handleAddBall() { //in function to use useState
     const newList = [...pokeballList]; //spread operator to shallow copy og list, avoids mutation error
-    if (newList.length > 0){
-      const newId = newList[newList.length-1]+1;
+    if (newList.length > 0) {
+      const newId = newList[newList.length - 1] + 1;
       newList.push(newId);
     }
     else {
       newList.push(1);
-    }  
+    }
     setPokeballList(newList);
   }
 
-  return(
+  function handleRemoveBall() { //in function to use useState
+    const newList = [...pokeballList]; //spread operator to shallow copy og list, avoids mutation error
+    if (newList.length > 0) {
+      newList.shift();
+    }
+    setPokeballList(newList);
+  }
+
+  return (
     <div className="canvas-container">
 
 
-      <Canvas > 
+      <Canvas>
         <Float>
-          <Text3D position={[-2,0,0]} font={'/fonts/Roboto Mono_Bold.json'}
-          onClick={ handleAddBall }> Click 
-            <meshStandardMaterial color={0x75e6da} />
+          <Text3D position={[-30, 4, 0]} font={'/fonts/Roboto Mono_Bold.json'}
+            onClick={handleAddBall}> Click here to ADD a Pokeball!
+            <meshStandardMaterial color={0xdb1f48} />
+          </Text3D>
+        </Float>
+        <Float>
+          <Text3D position={[3, 6, 0]} font={'/fonts/Roboto Mono_Bold.json'}
+            onClick={handleRemoveBall}> Click here to REMOVE a Pokeball!
+            <meshStandardMaterial color={0xdb1f48} />
           </Text3D>
         </Float>
         <OrbitControls />
-        <ambientLight intensity={1}/>
-        <Suspense>
-          <Physics gravity={[0, -9.81, 0]}>
+        <ambientLight intensity={1} />
+        <Suspense> { /* Allows async operations in React */}
+          <Physics>
 
-            {pokeballList.map( (currentPokeballId) => 
-            {return <Pokeball id={currentPokeballId} key={currentPokeballId} />} )}
+            {pokeballList.map((currentPokeballId) => {
+              return <Pokeball id={currentPokeballId} key={currentPokeballId}
+                onClick={() => console.log(currentPokeballId + ' hi')} />
+            })}
 
-            <CuboidCollider position={[0, -4, 0]} args={[20, .1, 20]} >
-              <Plane args={[30, 30]} rotation-x={Math.PI * -0.5}>
+            <RigidBody colliders="trimesh">
+              <Plane
+                position={[0, -20, 0]}
+                args={[60, 60]}
+                rotation={[ Math.PI*-0.5,0,0 ]}
+                receiveShadow>
+                <shadowMaterial opacity={0.2} />
                 <meshStandardMaterial color={0x75e6da} />
               </Plane>
-            </CuboidCollider>
+            </RigidBody>
           </Physics>
-        </Suspense>  
+        </Suspense>
       </Canvas>
     </ div>
   );

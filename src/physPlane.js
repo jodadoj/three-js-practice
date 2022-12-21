@@ -10,3 +10,5 @@ export default function PhyPlane({ color, ...props }) {
         </Plane>
     );
   }
+
+  //switched to rapier
